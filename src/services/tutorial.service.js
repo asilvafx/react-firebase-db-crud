@@ -1,5 +1,5 @@
 import { ref, push, update, remove } from "firebase/database";
-import database from "../firebase";
+import database from "../firebase.js";
 
 const db = database;
 
