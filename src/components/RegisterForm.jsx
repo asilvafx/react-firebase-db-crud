@@ -104,9 +104,7 @@ const RegisterForm  = () => {
                 </div>
             ) : (
                 <div className="w-full max-w-2xl p-6 border flex flex-col m-auto">
-                    {errorMessage && (
-                        <div className="text-red-500 mb-4">{errorMessage}</div>
-                    )}
+
                     <div className="mb-8">
                         <h1 className="text-2xl mb-2">{t('register_title')}</h1>
                         <p className="text-gray-500">{t('register_description')}</p>
@@ -161,6 +159,10 @@ const RegisterForm  = () => {
                             name="confirm-password"
                         />
                     </div>
+
+                    {errorMessage && (
+                        <div className="text-red-500 mb-4">{errorMessage}</div>
+                    )}
 
                     <button
                         onClick={saveUser}

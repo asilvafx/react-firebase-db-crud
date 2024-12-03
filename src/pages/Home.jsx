@@ -24,7 +24,11 @@ const Home = ({ userData }) => { // Correctly destructure userData from props
             {isLoggedIn ? (
                 <>
                     <UserInformation userData={userData} />
-                    <UsersList />
+
+                    {userData?.isAdmin === true && ( // Check if user is admin
+                        <UsersList />
+                    )}
+
                 </>
             ) : (
                 <div className="w-full max-w-2xl m-auto">

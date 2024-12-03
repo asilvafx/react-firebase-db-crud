@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
+import Cookies from 'js-cookie';
 import DBService from "../data/db.service.js";
 import { decryptPassword, encryptPassword } from '../lib/crypto.js';
 
 const UserView = ({ user, refreshList }) => {
+
+    const userId = (Cookies.get("uid") ? atob(Cookies.get("uid")) : null);
     const [currentUser , setCurrentUser ] = useState({
         key: null,
         displayName: "",
@@ -43,7 +46,7 @@ const UserView = ({ user, refreshList }) => {
 
     const onChangeRole = (e) => {
         const role = e.target.value === "1"; // Convert to boolean
-        setCurrentUser ((prev) => ({
+        setCurrentUser((prev) => ({
             ...prev,
             isAdmin: role,
         }));
@@ -51,7 +54,7 @@ const UserView = ({ user, refreshList }) => {
 
     const onChangePassword = (e) => {
         const password = e.target.value;
-        setCurrentUser ((prev) => ({
+        setCurrentUser((prev) => ({
             ...prev,
             passwordDecrypted: password,
             password: encryptPassword(password),
@@ -164,7 +167,11 @@ const UserView = ({ user, refreshList }) => {
                                 Role:
                             </label>
                             <select id="role" name="role" onChange={onChangeRole}
-                                    value={currentUser.isAdmin ? "1" : "0"}>
+                                    value={currentUser.isAdmin ? "1" : "0"}
+                                    disabled={currentUser.uid === userId}
+                                    aria-disabled={currentUser.uid === userId}
+                                    readOnly={currentUser.uid === userId}
+                            >
                                 <option value="1">Admin</option>
                                 <option value="0">User</option>
                             </select>
@@ -181,16 +188,30 @@ const UserView = ({ user, refreshList }) => {
                         </div>
                     </form>
 
+                    <div className="flex flex-wrap gap-2 items-center">
+
+                    <button
+                        className="btn bg-red-600 text-white px-2 py-1 rounded-md"
+                        onClick={deleteUser}
+                        disabled={currentUser.uid === userId}
+                        aria-disabled={currentUser.uid === userId}
+                        readOnly={currentUser.uid === userId}
+                    >
+                        Delete
+                    </button>
                     {currentUser.status ? (
                         <button
-                            className="btn bg-gray-600 text-white mr-2 px-2 py-1 rounded-md"
+                            className="btn bg-gray-600 text-white px-2 py-1 rounded-md"
                             onClick={() => updateStatus(false)}
+                            disabled={currentUser.uid === userId}
+                            aria-disabled={currentUser.uid === userId}
+                            readOnly={currentUser.uid === userId}
                         >
                             Disable
                         </button>
                     ) : (
                         <button
-                            className="btn bg-blue-600 text-white mr-2 px-2 py-1 rounded-md"
+                            className="btn bg-blue-600 text-white px-2 py-1 rounded-md"
                             onClick={() => updateStatus(true)}
                         >
                             Activate
@@ -198,17 +219,13 @@ const UserView = ({ user, refreshList }) => {
                     )}
 
                     <button
-                        className="btn bg-green-600 text-white mr-2 px-2 py-1 rounded-md"
-                        onClick={updateUser }
+                        className="btn bg-green-600 text-white px-2 py-1 rounded-md"
+                        onClick={updateUser}
                     >
                         Update
                     </button>
-                    <button
-                        className="btn bg-red-600 text-white px-2 py-1 rounded-md"
-                        onClick={deleteUser }
-                    >
-                        Delete
-                    </button>
+
+                    </div>
                     {message && <div className="mt-2 text-green-500">{message}</div>}
                 </div>
             ) : (
