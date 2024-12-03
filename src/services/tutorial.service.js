@@ -1,7 +1,18 @@
-import { ref, push, update, remove } from "firebase/database";
-import database from "../firebase.js";
+import { getDatabase, ref, push, update, remove } from "firebase/database";
+import { initializeApp } from "firebase/app";
 
-const db = database;
+const firebaseConfig = {
+    apiKey: "AIzaSyAgaZy99JtBp7_VTdA4XIfGu4NiEHYgX74",
+    databaseURL: "https://react-firebase-db-crud-default-rtdb.europe-west1.firebasedatabase.app",
+    authDomain: "react-firebase-db-crud.firebaseapp.com",
+    projectId: "react-firebase-db-crud",
+    storageBucket: "react-firebase-db-crud.firebasestorage.app",
+    messagingSenderId: "561120720724",
+    appId: "1:561120720724:web:57d1482aaecf098b407ac1"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
 
 class TutorialDataService {
     getAll() {
