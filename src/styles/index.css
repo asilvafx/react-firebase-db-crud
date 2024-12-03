@@ -21,6 +21,8 @@
     --secondary-color: #e5e5e5;
     --text-color: #1e1e1e;
     --border-color: #e8e8e8;
+    --input-bg: rgba(255,255,255, 0.3);
+    --input-bg-focus: rgba(225,225,225, 0.5);
   } 
   /* Dark Theme */
   html.dark {
@@ -29,6 +31,8 @@
     --secondary-color: #181818;
     --text-color: #e0e0e0;
     --border-color: #313131;
+    --input-bg: rgba(0,0,0, 0.3);
+    --input-bg-focus: rgba(25,25,25, 0.5);
   }
 }
 
@@ -78,18 +82,18 @@
     color: var(--muted-color);
     opacity: 1; 
   }
-  
   ::-ms-input-placeholder { /* Edge 12 -18 */
     color: var(--muted-color);
   }
   input, select, textarea{
     color: var(--text-color);
-    background-color: rgba(0,0,0, 0.3);
+    background-color: var(--input-bg) !important;
+    border: 1px solid var(--border-color);
   }
-
   textarea:focus, input:focus {
     color: var(--text-color);
-    background-color: rgba(0,0,0, 0.4);
+    background-color: var(--input-bg-focus) !important;
+    border: 1px solid var(--primary-color);
   }
   button, .btn, .button { 
     background-color: var(--alt-color);

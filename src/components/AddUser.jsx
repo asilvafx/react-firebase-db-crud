@@ -1,5 +1,6 @@
     import React, { Component } from "react";
     import DBService from "../data/db.service.js";
+    import { encryptPassword } from '../lib/crypto.js';
 
     export default class AddUser extends Component {
         constructor(props) {
@@ -45,7 +46,7 @@
                         // Proceed to create the user
                         let data = {
                             email: email,
-                            password: password,
+                            password: encryptPassword(password),
                             status: false
                         };
 

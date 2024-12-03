@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import DBService from "../data/db.service.js";
-
+import { decryptPassword, encryptPassword } from '../lib/crypto.js';
 export default class UserView extends Component {
     constructor(props) {
         super(props);
@@ -15,6 +15,7 @@ export default class UserView extends Component {
                 key: null,
                 email: "",
                 password: "",
+                passwordDecrypted: "",
                 status: false,
             },
             message: "",
@@ -37,6 +38,10 @@ export default class UserView extends Component {
         this.setState({
             currentUser: this.props.user,
         });
+
+        if(this.state.currentUser.password && this.state.currentUser.password.length > 0){
+            this.state.currentUser.passwordDecrypted = decryptPassword(this.state.currentUser.password);
+        }
     }
 
     onChangeEmail(e) {
@@ -58,7 +63,8 @@ export default class UserView extends Component {
         this.setState((prevState) => ({
             currentUser: {
                 ...prevState.currentUser,
-                password: password,
+                passwordDecrypted: password,
+                password: encryptPassword(password),
             },
         }));
     }
@@ -128,12 +134,23 @@ export default class UserView extends Component {
                                 />
                             </div>
                             <div className="flex flex-col mb-4">
-                                <label htmlFor="password" className="text-sm uppercase">Password</label>
+                                <label htmlFor="encryptedPassword" className="text-sm uppercase">Encrypted Password</label>
+                                <input
+                                    type="text"
+                                    className="form-control pointer-events-none"
+                                    id="encryptedPassword"
+                                    value={currentUser.password}
+                                    readOnly={true}
+                                    aria-disabled={true}
+                                />
+                            </div>
+                            <div className="flex flex-col mb-4">
+                                <label htmlFor="password" className="text-sm uppercase">Decrypted Password</label>
                                 <input
                                     type="text"
                                     className="form-control"
                                     id="password"
-                                    value={currentUser.password}
+                                    value={currentUser.passwordDecrypted}
                                     onChange={this.onChangePassword}
                                 />
                             </div>
@@ -142,7 +159,8 @@ export default class UserView extends Component {
                                 <label>
                                     <strong>Status:</strong>
                                 </label>
-                                <span className={`uppercase ${currentUser.status ? "text-blue-500" : "text-gray-600"}`}>{currentUser.status ? "Active" : "Inactive"}</span>
+                                <span
+                                    className={`uppercase ${currentUser.status ? "text-blue-500" : "text-gray-600"}`}>{currentUser.status ? "Active" : "Inactive"}</span>
                             </div>
                         </form>
 
