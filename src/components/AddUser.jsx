@@ -11,6 +11,7 @@ const AddUser  = () => {
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [submitted, setSubmitted] = useState(false);
+    const [loading, setLoading] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
 
     const onChangeDisplayName = (e) => {
@@ -30,44 +31,56 @@ const AddUser  = () => {
         setConfirmPassword(e.target.value);
     };
 
-    const saveUser  = () => {
+    const saveUser  = async () => {
+        setLoading(true);
 
+        if( !displayName || !email || !password ) {
+            setErrorMessage("Missing information. Fill all fields and try again!");
+            setLoading(false);
+            return;
+        } else
         if(password !== confirmPassword){
             setErrorMessage("Passwords do not match!");
+            setLoading(false);
             return;
         }
 
+        try {
+
         const newUserId = uuidv4();
-
         // Check if the email already exists
-        DBService.getItemByKeyValue( 'email', email, 'users')
-        .then((user) => {
-            if (user) {
-                setErrorMessage("Email already exists!");
-            } else {
-                // Proceed to create the user
-                const data = {
-                    uid: newUserId,
-                    displayName: displayName,
-                    email: email,
-                    password: encryptPassword(password),
-                    status: false
-                };
+        const user = await DBService.getItemByKeyValue( 'email', email, 'users')
 
-                DBService.create(data, 'users')
-                    .then(() => {
-                        console.log("New user created successfully!");
-                        setSubmitted(true);
-                        setErrorMessage(""); // Clear error message on success
-                    })
-                    .catch((e) => {
-                        console.log(e);
-                    });
-            }
-        })
-        .catch((error) => {
-            console.error('Error fetching user:', error);
-        });
+        if (user) {
+            setErrorMessage("Email already exists in our system!");
+            setLoading(false);
+            return;
+        } else {
+            // Proceed to create the user
+            const data = {
+                uid: newUserId,
+                displayName: displayName,
+                email: email,
+                password: encryptPassword(password),
+                status: false
+            };
+
+            DBService.create(data, 'users')
+                .then(() => {
+                    console.log("New user created successfully!");
+                    setSubmitted(true);
+                    setErrorMessage("");
+                })
+                .catch((e) => {
+                    console.log(e);
+                });
+
+        }
+        } catch (error) {
+            console.log(error);
+        } finally {
+            setLoading(false);
+        }
 
     };
 
@@ -147,9 +160,14 @@ const AddUser  = () => {
                         />
                     </div>
 
-                    <button onClick={saveUser} className="btn bg-blue-600 text-white px-4 py-2 rounded-md">
-                        Create account
+                    <button
+                        onClick={saveUser}
+                        disabled={loading}
+                        className={`btn bg-blue-600 text-white px-4 py-2 rounded-md ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
+                    >
+                        {loading ? 'Creating...' : 'Create account'}
                     </button>
+
                     <p className="mt-4 text-center text-gray-500 text-sm">By signing up you agree with our Terms &
                         Conditions.</p>
 

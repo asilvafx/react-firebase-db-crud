@@ -1,4 +1,4 @@
-import React, { Suspense, lazy } from 'react';
+import React, { Suspense, lazy, useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import Cookies from 'js-cookie';
@@ -11,46 +11,51 @@ const Logout = lazy(() => import('./pages/Logout'));
 const CookiesWidget = lazy(() => import('./components/CookiesWidget'));
 
 const App = () => {
+    const isLoggedIn = Cookies.get('isLoggedIn');
+    const uid = Cookies.get('uid');
+    const [userData, setUserData] = useState({});
 
-  const isLoggedIn = Cookies.get('isLoggedIn');
-  const uid = Cookies.get('uid');
+    useEffect(() => {
+        const getUserData = async () => {
+            if (isLoggedIn && uid) {
+                const fetchedUserData = await DBService.getItemByKeyValue('uid', atob(uid), 'users');
 
-  if(isLoggedIn && uid){
-  const getUserData = async () => {
-      const userData = await DBService.getItemByKeyValue('uid', atob(uid), 'users');
+                if (!fetchedUserData) {
+                    console.log('Error: Invalid login information.');
+                    Cookies.remove('isLoggedIn');
+                    Cookies.remove('uid');
+                    return;
+                }
 
-      if(!userData){
-          console.log('Error: Invalid login information.');
-          Cookies.remove('isLoggedIn');
-          Cookies.remove('uid');
-          return;
-      }
-  }
-  getUserData();
-  }
+                setUserData(fetchedUserData);
+            }
+        };
 
-  return (
-    <HelmetProvider>
-      <Suspense fallback={<div id="loading">Loading...</div>}>
-            <Router
-                future={{
-                v7_startTransition: true,
-                v7_relativeSplatPath: true,
-                }}
-            >
-              <CookiesWidget />
-                <div className="page-view">
-                  <Routes>
-                    <Route path="/" element={<Home />} />
-                    <Route path="/add" element={<Add />} />
-                    <Route path="/logout" element={<Logout />} />
-                    <Route path="*" element={<Home />} />
-                  </Routes>
-                </div>
-            </Router>
-      </Suspense>
-    </HelmetProvider>
-  );
+        getUserData();
+    }, [isLoggedIn, uid]); // Dependency array to run effect when isLoggedIn or uid changes
+
+    return (
+        <HelmetProvider>
+            <Suspense fallback={<div id="loading">Loading...</div>}>
+                <Router
+                    future={{
+                        v7_startTransition: true,
+                        v7_relativeSplatPath: true,
+                    }}
+                >
+                    <CookiesWidget />
+                    <div className="page-view">
+                        <Routes>
+                            <Route path="/" element={<Home userData={userData} />} />
+                            <Route path="/add" element={<Add />} />
+                            <Route path="/logout" element={<Logout />} />
+                            <Route path="*" element={<Home userData={userData} />} />
+                        </Routes>
+                    </div>
+                </Router>
+            </Suspense>
+        </HelmetProvider>
+    );
 };
 
 export default App;

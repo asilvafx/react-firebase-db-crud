@@ -23,7 +23,11 @@ class DBService {
 
         return get(q).then((snapshot) => {
             if (snapshot.exists()) {
-                return snapshot.val(); // Return the data for the specific item(s)
+                const snapshotValue = snapshot.val();
+                const userObj = Object.keys(snapshotValue);
+                const getUserId = userObj[0];
+
+                return snapshotValue[getUserId]; // Return the data for the specific item(s)
             } else {
                 return null; // Return null if no items match the query
             }

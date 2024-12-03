@@ -29,11 +29,9 @@ const LoginForm = () => {
                 return;
             }
             // Redirect or perform any action after successful login
-            const userObj = Object.keys(userData);
-            const getUserId = userObj[0];
 
-            const currentPassword = userData[getUserId].password;
-            const uid = userData[getUserId].uid;
+            const currentPassword = userData.password;
+            const uid = userData.uid;
 
             if(decryptPassword(currentPassword) !== password){
                 console.log('Error: Invalid credentials.');
