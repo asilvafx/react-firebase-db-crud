@@ -1,5 +1,5 @@
 import { getDatabase, ref, push, update, remove } from "firebase/database";
-import { initializeApp } from "firebase/app";
+import { initializeApp } from "firebase/app"; 
 
 const firebaseConfig = {
     apiKey: process.env.API_KEY,
