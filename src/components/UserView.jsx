@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import DBService from "../services/db.service.js";
+import DBService from "../data/db.service.js";
 
 export default class UserView extends Component {
     constructor(props) {

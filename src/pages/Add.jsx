@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
 import Header from '../components/Header';
 
-import AddTutorial from "../components/add-tutorial.component";
+import AddTutorial from "../components/AddUser";
 
 const Add = () => {
     const { t } = useTranslation();

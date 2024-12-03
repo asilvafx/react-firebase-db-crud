@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import DBService from "../services/db.service.js";
-import UserView from "./user.component";
+import DBService from "../data/db.service.js";
+import UserView from "./UserView";
 import { onValue } from "firebase/database";
 import { FaUser } from "react-icons/fa";
 

@@ -2,7 +2,7 @@ import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
 import Header from '../components/Header';
-import TutorialsList from "../components/tutorial-list.component";
+import TutorialsList from "../components/UsersList";
 
 const Home = () => {
   const { t } = useTranslation();
