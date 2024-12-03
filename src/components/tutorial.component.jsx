@@ -73,7 +73,7 @@ export default class Tutorial extends Component {
                         ...prevState.currentTutorial,
                         published: status,
                     },
-                    message: "The status was updated successfully!",
+                    message: "User status was updated successfully!",
                 }));
             })
             .catch((e) => {
@@ -90,7 +90,7 @@ export default class Tutorial extends Component {
         TutorialDataService.update(this.state.currentTutorial.key, data)
             .then(() => {
                 this.setState({
-                    message: "The tutorial was updated successfully!",
+                    message: "User profile was updated successfully!",
                 });
             })
             .catch((e) => {
