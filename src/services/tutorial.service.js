@@ -2,13 +2,13 @@ import { getDatabase, ref, push, update, remove } from "firebase/database";
 import { initializeApp } from "firebase/app";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyAgaZy99JtBp7_VTdA4XIfGu4NiEHYgX74",
-    databaseURL: "https://react-firebase-db-crud-default-rtdb.europe-west1.firebasedatabase.app",
-    authDomain: "react-firebase-db-crud.firebaseapp.com",
-    projectId: "react-firebase-db-crud",
-    storageBucket: "react-firebase-db-crud.firebasestorage.app",
-    messagingSenderId: "561120720724",
-    appId: "1:561120720724:web:57d1482aaecf098b407ac1"
+    apiKey: process.env.API_KEY,
+    databaseURL: process.env.DATABASE_URL,
+    authDomain: process.env.AUTH_DOMAIN,
+    projectId: process.env.PROJECT_ID,
+    storageBucket: process.env.STORAGE_BUCKET,
+    messagingSenderId: process.env.MESSAGING_SENDER_ID,
+    appId: process.env.APP_ID
 };
 
 const app = initializeApp(firebaseConfig);

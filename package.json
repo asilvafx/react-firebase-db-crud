@@ -1,7 +1,7 @@
 {
   "name": "vite-react-boilerplate",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0",
   "type": "module",
   "scripts": {
     "dev": "vite --force",
@@ -14,7 +14,7 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "crypto-js": "^4.2.0",
-    "dotenv": "^16.4.5",
+    "dotenv": "^16.4.6",
     "firebase": "^11.0.2",
     "flowbite-react": "^0.10.2",
     "i18next-browser-languagedetector": "^8.0.0",
