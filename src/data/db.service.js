@@ -1,4 +1,4 @@
-import { getDatabase, ref, push, update, remove, get, child } from "firebase/database";
+import { getDatabase, ref, push, update, remove, get, query, orderByChild, equalTo } from "firebase/database";
 import { initializeApp } from "firebase/app";
 
 const firebaseConfig = {
@@ -15,13 +15,28 @@ const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
 class DBService {
-    getAll(table = 'tutorials') {
+
+    // New method to get an item by a specific key-value pair
+    getItemByKeyValue(key, value, table) {
+        const itemsRef = ref(db, `/${table}`);
+        const q = query(itemsRef, orderByChild(key), equalTo(value));
+
+        return get(q).then((snapshot) => {
+            if (snapshot.exists()) {
+                return snapshot.val(); // Return the data for the specific item(s)
+            } else {
+                return null; // Return null if no items match the query
+            }
+        });
+    }
+
+    getAll(table) {
         const requestRef = ref(db, `/${table}`);
         return requestRef;
 
     }
 
-    getAllPromise(table = 'users') {
+    getAllPromise(table) {
         const requestRef = ref(db, `/${table}`);
         return get(requestRef).then((snapshot) => {
             if (snapshot.exists()) {
@@ -32,22 +47,22 @@ class DBService {
         });
     }
 
-    create(data, table = 'tutorials') {
+    create(data, table) {
         const requestRef = ref(db, `/${table}`);
         return push(requestRef, data);
     }
 
-    update(key, value, table = 'tutorials') {
+    update(key, value, table) {
         const tutorialRef = ref(db, `/${table}/${key}`);
         return update(tutorialRef, value);
     }
 
-    delete(key, table = 'tutorials') {
+    delete(key, table) {
         const tutorialRef = ref(db, `/${table}/${key}`);
         return remove(tutorialRef);
     }
 
-    deleteAll(table = 'tutorials') {
+    deleteAll(table) {
         const requestRef = ref(db, `/${table}`);
         return remove(requestRef);
     }

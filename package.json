@@ -30,6 +30,7 @@
     "save-dev": "^0.0.1-security",
     "tailwind-merge": "^2.4.0",
     "tailwindcss-animate": "^1.0.7",
+    "uuid": "^11.0.3",
     "vanilla-cookieconsent": "^3.0.1"
   },
   "devDependencies": {

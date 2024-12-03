@@ -5,10 +5,12 @@ import { decryptPassword, encryptPassword } from '../lib/crypto.js';
 const UserView = ({ user, refreshList }) => {
     const [currentUser , setCurrentUser ] = useState({
         key: null,
+        displayName: "",
         email: "",
         password: "",
         passwordDecrypted: "",
         status: false,
+        isAdmin: false,
     });
     const [message, setMessage] = useState("");
 
@@ -23,11 +25,27 @@ const UserView = ({ user, refreshList }) => {
         }
     }, [user]); // Run this effect when the user prop changes
 
+    const onChangeDisplayName = (e) => {
+        const displayName = e.target.value;
+        setCurrentUser ((prev) => ({
+            ...prev,
+            displayName: displayName,
+        }));
+    };
+
     const onChangeEmail = (e) => {
         const email = e.target.value;
         setCurrentUser ((prev) => ({
             ...prev,
             email: email,
+        }));
+    };
+
+    const onChangeRole = (e) => {
+        const role = e.target.value === "1"; // Convert to boolean
+        setCurrentUser ((prev) => ({
+            ...prev,
+            isAdmin: role,
         }));
     };
 
@@ -56,8 +74,10 @@ const UserView = ({ user, refreshList }) => {
 
     const updateUser  = () => {
         const data = {
+            displayName: currentUser .displayName,
             email: currentUser .email,
             password: currentUser .password,
+            isAdmin: currentUser .isAdmin, // Include isAdmin in the update
         };
 
         DBService.update(currentUser .key, data, 'users')
@@ -86,22 +106,32 @@ const UserView = ({ user, refreshList }) => {
                 <div className="edit-form">
                     <form className="mb-4">
                         <div className="flex flex-col mb-4">
+                            <label htmlFor="displayName" className="text-sm uppercase">Account Name</label>
+                            <input
+                                type="text"
+                                className="form-control"
+                                id="displayName"
+                                value={currentUser.displayName || ""}
+                                onChange={onChangeDisplayName}
+                            />
+                        </div>
+                        <div className="flex flex-col mb-4">
                             <label htmlFor="email" className="text-sm uppercase">Email</label>
                             <input
                                 type="email"
                                 className="form-control"
                                 id="email"
-                                value={currentUser .email || ""}
+                                value={currentUser.email || ""}
                                 onChange={onChangeEmail}
                             />
                         </div>
                         <div className="flex flex-col mb-4">
-                            <label htmlFor="encryptedPassword" className="text-sm uppercase">Encrypted Password</label>
+                            < label htmlFor="encryptedPassword" className="text-sm uppercase">Encrypted Password</label>
                             <input
                                 type="text"
                                 className="form-control pointer-events-none"
                                 id="encryptedPassword"
-                                value={currentUser .password || ""}
+                                value={currentUser.password || ""}
                                 readOnly={true}
                                 aria-disabled={true}
                             />
@@ -112,23 +142,34 @@ const UserView = ({ user, refreshList }) => {
                                 type="text"
                                 className="form-control"
                                 id="password"
-                                value={currentUser .passwordDecrypted || ""}
+                                value={currentUser.passwordDecrypted || ""}
                                 onChange={onChangePassword}
                             />
                         </div>
 
-                        <div className="inline-flex gap-1 items-center">
+                        <div className="flex flex-col gap-1 mb-4">
+                            <label htmlFor="role" className="text-sm uppercase">
+                                Role:
+                            </label>
+                            <select id="role" name="role" onChange={onChangeRole}
+                                    value={currentUser.isAdmin ? "1" : "0"}>
+                                <option value="1">Admin</option>
+                                <option value="0">User</option>
+                            </select>
+                        </div>
+
+                        <div className="flex gap-1 items-center mb-4">
                             <label>
                                 <strong>Status:</strong>
                             </label>
                             <span
-                                className={`uppercase ${currentUser .status ? "text-blue-500" : "text-gray-600"}`}>
-                                {currentUser .status ? "Active" : "Inactive"}
+                                className={`uppercase ${currentUser.status ? "text-blue-500" : "text-gray-600"}`}>
+                                {currentUser.status ? "Active" : "Inactive"}
                             </span>
                         </div>
                     </form>
 
-                    {currentUser .status ? (
+                    {currentUser.status ? (
                         <button
                             className="btn bg-gray-600 text-white mr-2 px-2 py-1 rounded-md"
                             onClick={() => updateStatus(false)}

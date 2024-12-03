@@ -2,8 +2,10 @@ import React from 'react';
 import { DarkThemeToggle } from "flowbite-react";
 import { IoMenu } from "react-icons/io5";
 import { Link } from "react-router-dom";
+import Cookies from "js-cookie"; 
 const Header = () => {
 
+    const isLoggedIn = Cookies.get('isLoggedIn');
 
     return (
         <header>
@@ -35,19 +37,30 @@ const Header = () => {
                                     Home
                             </Link>
                             </li>
-                            <li>
-                                <Link to="/add"
-                                   className="block py-2 pr-4 pl-3 text-gray-700 dark:text-gray-400 rounded lg:p-0">
-                                    Create user
-                                </Link>
-                            </li>
+                            {isLoggedIn ? (
+                                <li>
+                                    <Link
+                                        to="/logout"
+                                        className="block py-2 pr-4 pl-3 text-gray-700 dark:text-gray-400 rounded lg:p-0">
+                                        Logout
+                                    </Link>
+                                </li>
+                            ) : (
+                                <li>
+                                    <Link
+                                        to="/add"
+                                        className="block py-2 pr-4 pl-3 text-gray-700 dark:text-gray-400 rounded lg:p-0">
+                                        Create new account
+                                    </Link>
+                                </li>
+                            )}
+
                         </ul>
                     </div>
                 </div>
             </nav>
 
             <div className="min-h-40 w-full"></div>
-
 
 
         </header>

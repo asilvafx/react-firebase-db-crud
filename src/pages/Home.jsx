@@ -3,9 +3,14 @@ import { Helmet } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
 import Header from '../components/Header';
 import UsersList from "../components/UsersList";
+import LoginForm from "../components/LoginForm";
+import Cookies from "js-cookie";
 
 const Home = () => {
   const { t } = useTranslation();
+
+
+  const isLoggedIn = Cookies.get('isLoggedIn');
 
   return (
       <>
@@ -16,8 +21,15 @@ const Home = () => {
 
         <Header />
 
-        <UsersList />
+          {isLoggedIn ? (
+              <UsersList />
+          ) : ( 
+              <div className="w-full max-w-2xl m-auto">
+                  <LoginForm/>
+              </div>
+          )}
 
+          <div className="min-h-12"></div>
       </>
   );
 };

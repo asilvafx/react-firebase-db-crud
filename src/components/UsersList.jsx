@@ -25,9 +25,11 @@ const UsersList = () => {
             let data = childSnapshot.val();
             usersList.push({
                 key: key,
+                displayName: data.displayName,
                 email: data.email,
                 password: data.password,
                 status: data.status,
+                isAdmin: data.isAdmin,
             });
         });
 
