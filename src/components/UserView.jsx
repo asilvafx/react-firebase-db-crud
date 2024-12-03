@@ -106,6 +106,17 @@ const UserView = ({ user, refreshList }) => {
                 <div className="edit-form">
                     <form className="mb-4">
                         <div className="flex flex-col mb-4">
+                            < label htmlFor="userId" className="text-sm uppercase">UID</label>
+                            <input
+                                type="text"
+                                className="form-control pointer-events-none"
+                                id="userId"
+                                value={currentUser.uid || ""}
+                                readOnly={true}
+                                aria-disabled={true}
+                            />
+                        </div>
+                        <div className="flex flex-col mb-4">
                             <label htmlFor="displayName" className="text-sm uppercase">Account Name</label>
                             <input
                                 type="text"
@@ -126,6 +137,17 @@ const UserView = ({ user, refreshList }) => {
                             />
                         </div>
                         <div className="flex flex-col mb-4">
+                            <label htmlFor="password" className="text-sm uppercase">Change Password</label>
+                            <input
+                                type="text"
+                                className="form-control"
+                                id="password"
+                                value={currentUser.passwordDecrypted || ""}
+                                onChange={onChangePassword}
+                            />
+                        </div>
+
+                        <div className="flex flex-col mb-4">
                             < label htmlFor="encryptedPassword" className="text-sm uppercase">Encrypted Password</label>
                             <input
                                 type="text"
@@ -134,16 +156,6 @@ const UserView = ({ user, refreshList }) => {
                                 value={currentUser.password || ""}
                                 readOnly={true}
                                 aria-disabled={true}
-                            />
-                        </div>
-                        <div className="flex flex-col mb-4">
-                            <label htmlFor="password" className="text-sm uppercase">Decrypted Password</label>
-                            <input
-                                type="text"
-                                className="form-control"
-                                id="password"
-                                value={currentUser.passwordDecrypted || ""}
-                                onChange={onChangePassword}
                             />
                         </div>
 

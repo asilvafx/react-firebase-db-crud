@@ -24,6 +24,7 @@ const App = () => {
                     console.log('Error: Invalid login information.');
                     Cookies.remove('isLoggedIn');
                     Cookies.remove('uid');
+                    window.location.href = '/';
                     return;
                 }
 

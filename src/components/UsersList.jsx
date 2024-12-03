@@ -30,6 +30,7 @@ const UsersList = () => {
                 password: data.password,
                 status: data.status,
                 isAdmin: data.isAdmin,
+                uid: data.uid, 
             });
         });
 
