@@ -1,5 +1,5 @@
 import { getDatabase, ref, push, update, remove } from "firebase/database";
-import { initializeApp } from "firebase/app"; 
+import { initializeApp } from "firebase/app";
 
 const firebaseConfig = {
     apiKey: process.env.API_KEY,
@@ -15,28 +15,28 @@ const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
 class TutorialDataService {
-    getAll() {
-        const tutorialsRef = ref(db, '/tutorials');
+    getAll(table = 'tutorials') {
+        const tutorialsRef = ref(db, `/${table}`);
         return tutorialsRef;
     }
 
-    create(tutorial) {
-        const tutorialsRef = ref(db, '/tutorials');
-        return push(tutorialsRef, tutorial);
+    create(data, table = 'tutorials') {
+        const tutorialsRef = ref(db, `/${table}`);
+        return push(tutorialsRef, data);
     }
 
-    update(key, value) {
-        const tutorialRef = ref(db, `/tutorials/${key}`);
+    update(key, value, table = 'tutorials') {
+        const tutorialRef = ref(db, `/${table}/${key}`);
         return update(tutorialRef, value);
     }
 
-    delete(key) {
-        const tutorialRef = ref(db, `/tutorials/${key}`);
+    delete(key, table = 'tutorials') {
+        const tutorialRef = ref(db, `/${table}/${key}`);
         return remove(tutorialRef);
     }
 
-    deleteAll() {
-        const tutorialsRef = ref(db, '/tutorials');
+    deleteAll(table = 'tutorials') {
+        const tutorialsRef = ref(db, `/${table}`);
         return remove(tutorialsRef);
     }
 }

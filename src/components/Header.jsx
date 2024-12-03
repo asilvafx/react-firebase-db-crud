@@ -9,12 +9,12 @@ const Header = () => {
         <header>
             <nav className="fixed w-full top-0 bg-secondary border-gray-200 px-4 lg:px-6 py-2.5">
                 <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl h-10">
-                    <a href="https://flowbite.com" className="flex items-center">
+                    <Link to="/" className="flex items-center">
                         <img src="https://flowbite.com/docs/images/logo.svg" className="mr-3 h-6 sm:h-9"
-                             alt="Flowbite Logo"/>
+                             alt="App Logo"/>
                         <span
                             className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">React App</span>
-                    </a>
+                    </Link>
                     <div className="flex items-center lg:order-2">
                         <DarkThemeToggle className="btn text-alt hover:bg-alt focus:ring-0"/>
 

@@ -4,42 +4,41 @@ import TutorialDataService from "../services/tutorial.service";
 export default class AddTutorial extends Component {
     constructor(props) {
         super(props);
-        this.onChangeTitle = this.onChangeTitle.bind(this);
-        this.onChangeDescription = this.onChangeDescription.bind(this);
+        this.onChangeEmail = this.onChangeEmail.bind(this);
+        this.onChangePassword = this.onChangePassword.bind(this);
         this.saveTutorial = this.saveTutorial.bind(this);
         this.newTutorial = this.newTutorial.bind(this);
 
         this.state = {
-            title: "",
-            description: "",
-            published: false,
-
+            email: "",
+            password: "",
+            status: false,
             submitted: false,
         };
     }
 
-    onChangeTitle(e) {
+    onChangeEmail(e) {
         this.setState({
-            title: e.target.value,
+            email: e.target.value,
         });
     }
 
-    onChangeDescription(e) {
+    onChangePassword(e) {
         this.setState({
-            description: e.target.value,
+            password: e.target.value,
         });
     }
 
     saveTutorial() {
         let data = {
-            title: this.state.title,
-            description: this.state.description,
-            published: false
+            email: this.state.email,
+            password: this.state.password,
+            status: false
         };
 
-        TutorialDataService.create(data)
+        TutorialDataService.create(data, 'users')
             .then(() => {
-                console.log("Created new item successfully!");
+                console.log("New user created successfully!");
                 this.setState({
                     submitted: true,
                 });
@@ -51,10 +50,9 @@ export default class AddTutorial extends Component {
 
     newTutorial() {
         this.setState({
-            title: "",
-            description: "",
-            published: false,
-
+            email: "",
+            password: "",
+            status: false,
             submitted: false,
         });
     }
@@ -63,37 +61,37 @@ export default class AddTutorial extends Component {
         return (
             <div className="submit-form">
                 {this.state.submitted ? (
-                    <div>
-                        <h4>New user created successfully!</h4>
-                        <button className="btn btn-success" onClick={this.newTutorial}>
+                    <div className="w-full max-w-2xl flex flex-col items-center justify-center m-auto">
+                        <h4 className="mb-4">New user created successfully!</h4>
+                        <button className="btn px-4 py-2" onClick={this.newTutorial}>
                             Add another
                         </button>
                     </div>
                 ) : (
                     <div className="w-full max-w-2xl flex flex-col items-center justify-center m-auto">
                         <div className="flex flex-col mb-4">
-                            <label htmlFor="title" className="uppercase text-sm">Email</label>
+                            <label htmlFor="email" className="uppercase text-sm">Email</label>
                             <input
-                                type="text"
+                                type="email"
                                 className="form-control"
-                                id="title"
+                                id="email"
                                 required
-                                value={this.state.title}
-                                onChange={this.onChangeTitle}
-                                name="title"
+                                value={this.state.email}
+                                onChange={this.onChangeEmail}
+                                name="email"
                             />
                         </div>
 
                         <div className="flex flex-col mb-4">
-                            <label htmlFor="description" className="uppercase text-sm">Password</label>
+                            <label htmlFor="password" className="uppercase text-sm">Password</label>
                             <input
                                 type="text"
                                 className="form-control"
-                                id="description"
+                                id="password"
                                 required
-                                value={this.state.description}
-                                onChange={this.onChangeDescription}
-                                name="description"
+                                value={this.state.password}
+                                onChange={this.onChangePassword}
+                                name="password"
                             />
                         </div>
 

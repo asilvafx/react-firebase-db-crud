@@ -8,63 +8,63 @@ export default class TutorialsList extends Component {
     constructor(props) {
         super(props);
         this.refreshList = this.refreshList.bind(this);
-        this.setActiveTutorial = this.setActiveTutorial.bind(this);
-        this.removeAllTutorials = this.removeAllTutorials.bind(this);
+        this.setActiveUser = this.setActiveUser.bind(this);
+        this.removeAllUsers = this.removeAllUsers.bind(this);
         this.onDataChange = this.onDataChange.bind(this);
 
         this.state = {
-            tutorials: [],
-            currentTutorial: null,
+            users: [],
+            currentUser: null,
             currentIndex: -1,
         };
     }
 
     componentDidMount() {
-        const tutorialsRef = TutorialDataService.getAll();
-        onValue(tutorialsRef, this.onDataChange);
+        const usersRef = TutorialDataService.getAll('users');
+        onValue(usersRef, this.onDataChange);
     }
 
     componentWillUnmount() {
-        const tutorialsRef = TutorialDataService.getAll();
+        const usersRef = TutorialDataService.getAll('users');
         // Note: Firebase v9+ does not have an off method for removing listeners
         // You can use a cleanup function if needed, but it's not required for onValue
     }
 
     onDataChange(snapshot) {
-        let tutorials = [];
+        let users = [];
 
         snapshot.forEach((childSnapshot) => {
             let key = childSnapshot.key;
             let data = childSnapshot.val();
-            tutorials.push({
+            users.push({
                 key: key,
-                title: data.title,
-                description: data.description,
-                published: data.published,
+                email: data.email,
+                password: data.password,
+                status: data.status,
             });
         });
 
         this.setState({
-            tutorials: tutorials,
+            users: users,
         });
     }
 
     refreshList() {
         this.setState({
-            currentTutorial: null,
+            currentUser: null,
             currentIndex: -1,
         });
     }
 
-    setActiveTutorial(tutorial, index) {
+    setActiveUser(user, index) {
         this.setState({
-            currentTutorial: tutorial,
+            currentUser: user,
             currentIndex: index,
         });
     }
 
-    removeAllTutorials() {
-        TutorialDataService.deleteAll()
+    removeAllUsers() {
+        TutorialDataService.deleteAll('users')
             .then(() => {
                 this.refreshList();
             })
@@ -74,7 +74,7 @@ export default class TutorialsList extends Component {
     }
 
     render() {
-        const { tutorials, currentTutorial, currentIndex } = this.state;
+        const { users, currentUser, currentIndex } = this.state;
 
         return (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 p-4">
@@ -82,17 +82,17 @@ export default class TutorialsList extends Component {
                     <h4 className="mb-4">Users List</h4>
 
                     <ul className="list-group bg-secondary p-4 rounded-md mb-4">
-                        {tutorials &&
-                            tutorials.map((tutorial, index) => (
+                        {users &&
+                            users.map((user, index) => (
                                 <li
                                     className={
                                         "list-group-item flex justify-between items-center " +
                                         (index === currentIndex ? "active" : "")
                                     }
-                                    onClick={() => this.setActiveTutorial(tutorial, index)}
+                                    onClick={() => this.setActiveUser(user, index)}
                                     key={index}
                                 >
-                                    <span>{tutorial.title}</span>
+                                    <span>{user.email}</span>
                                     <span><FaUser /></span>
                                 </li>
                             ))}
@@ -100,20 +100,20 @@ export default class TutorialsList extends Component {
 
                     <button
                         className="btn btn-sm btn-danger px-4 py-2 rounded-lg"
-                        onClick={this.removeAllTutorials}
+                        onClick={this.removeAllUsers}
                     >
                         Delete All
                     </button>
                 </div>
                 <div className="w-full border p-8">
-                    {currentTutorial ? (
+                    {currentUser ? (
                         <Tutorial
-                            tutorial={currentTutorial}
+                            user={currentUser}
                             refreshList={this.refreshList}
                         />
                     ) : (
                         <div>
-                            <p>Please click on a User...</p>
+                            <p>Please select a User...</p>
                         </div>
                     )}
                 </div>
