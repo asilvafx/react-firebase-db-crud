@@ -85,7 +85,7 @@ export default class UsersList extends Component {
                             users.map((user, index) => (
                                 <li
                                     className={
-                                        "list-group-item flex justify-between items-center " +
+                                        "list-group-item rounded-sm border-b border-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 p-2 flex justify-between items-center " +
                                         (index === currentIndex ? "active" : "")
                                     }
                                     onClick={() => this.setActiveUser (user, index)}

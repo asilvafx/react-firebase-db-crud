@@ -1,7 +1,7 @@
     import React, { Component } from "react";
     import DBService from "../data/db.service.js";
 
-    export default class AddTutorial extends Component {
+    export default class AddUser extends Component {
         constructor(props) {
             super(props);
             this.onChangeEmail = this.onChangeEmail.bind(this);
