@@ -2,13 +2,13 @@ import React, { Component } from "react";
 import DBService from "../data/db.service.js";
 import UserView from "./UserView";
 import { onValue } from "firebase/database";
-import { FaUser } from "react-icons/fa";
+import { FaUser  } from "react-icons/fa";
 
-export default class TutorialsList extends Component {
+export default class UsersList extends Component {
     constructor(props) {
         super(props);
         this.refreshList = this.refreshList.bind(this);
-        this.setActiveUser = this.setActiveUser.bind(this);
+        this.setActiveUser  = this.setActiveUser .bind(this);
         this.removeAllUsers = this.removeAllUsers.bind(this);
         this.onDataChange = this.onDataChange.bind(this);
 
@@ -20,12 +20,11 @@ export default class TutorialsList extends Component {
     }
 
     componentDidMount() {
-        const usersRef = DBService.getAll('users');
-        onValue(usersRef, this.onDataChange);
+        const usersRef = DBService.getAll('users'); // Get the reference
+        onValue(usersRef, this.onDataChange); // Listen for changes
     }
 
     componentWillUnmount() {
-        const usersRef = DBService.getAll('users');
         // Note: Firebase v9+ does not have an off method for removing listeners
         // You can use a cleanup function if needed, but it's not required for onValue
     }
@@ -56,7 +55,7 @@ export default class TutorialsList extends Component {
         });
     }
 
-    setActiveUser(user, index) {
+    setActiveUser (user, index) {
         this.setState({
             currentUser: user,
             currentIndex: index,
@@ -74,7 +73,7 @@ export default class TutorialsList extends Component {
     }
 
     render() {
-        const { users, currentUser, currentIndex } = this.state;
+        const { users, currentUser , currentIndex } = this.state;
 
         return (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 p-4">
@@ -89,11 +88,11 @@ export default class TutorialsList extends Component {
                                         "list-group-item flex justify-between items-center " +
                                         (index === currentIndex ? "active" : "")
                                     }
-                                    onClick={() => this.setActiveUser(user, index)}
-                                    key={index}
+                                    onClick={() => this.setActiveUser (user, index)}
+                                    key={user.key} // Use user.key instead of index
                                 >
                                     <span>{user.email}</span>
-                                    <span><FaUser /></span>
+                                    <span><FaUser  /></span>
                                 </li>
                             ))}
                     </ul>
@@ -106,10 +105,10 @@ export default class TutorialsList extends Component {
                     </button>
                 </div>
                 <div className="w-full border p-8">
-                    {currentUser ? (
+                    {currentUser  ? (
                         <UserView
-                            user={currentUser}
-                            refreshList={this.refreshList}
+                              user={currentUser }
+                              refreshList={this.refreshList}
                         />
                     ) : (
                         <div>

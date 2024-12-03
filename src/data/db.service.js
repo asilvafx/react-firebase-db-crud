@@ -1,4 +1,4 @@
-import { getDatabase, ref, push, update, remove } from "firebase/database";
+import { getDatabase, ref, push, update, remove, get, child } from "firebase/database";
 import { initializeApp } from "firebase/app";
 
 const firebaseConfig = {
@@ -18,6 +18,18 @@ class DBService {
     getAll(table = 'tutorials') {
         const requestRef = ref(db, `/${table}`);
         return requestRef;
+
+    }
+
+    getAllPromise(table = 'users') {
+        const requestRef = ref(db, `/${table}`);
+        return get(requestRef).then((snapshot) => {
+            if (snapshot.exists()) {
+                return snapshot.val(); // Return the data
+            } else {
+                return {}; // Return an empty object if no data
+            }
+        });
     }
 
     create(data, table = 'tutorials') {
