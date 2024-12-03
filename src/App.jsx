@@ -5,7 +5,7 @@ import Cookies from 'js-cookie';
 import DBService from './data/db.service';
 
 import Home from './pages/Home';
-const Add = lazy(() => import('./pages/Add'));
+const Register = lazy(() => import('./pages/Register'));
 const Logout = lazy(() => import('./pages/Logout'));
 
 const CookiesWidget = lazy(() => import('./components/CookiesWidget'));
@@ -48,7 +48,7 @@ const App = () => {
                     <div className="page-view">
                         <Routes>
                             <Route path="/" element={<Home userData={userData} />} />
-                            <Route path="/add" element={<Add />} />
+                            <Route path="/register" element={<Register />} />
                             <Route path="/logout" element={<Logout />} />
                             <Route path="*" element={<Home userData={userData} />} />
                         </Routes>

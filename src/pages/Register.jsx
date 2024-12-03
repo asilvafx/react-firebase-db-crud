@@ -3,9 +3,9 @@ import { Helmet } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
 import Header from '../components/Header';
 
-import AddUser from "../components/AddUser";
+import RegisterForm from "../components/RegisterForm";
 
-const Add = () => {
+const Register = () => {
     const { t } = useTranslation();
 
     return (
@@ -17,10 +17,10 @@ const Add = () => {
 
             <Header />
 
-            <AddUser />
+            <RegisterForm />
 
         </>
     );
 };
 
-export default Add;
+export default Register;

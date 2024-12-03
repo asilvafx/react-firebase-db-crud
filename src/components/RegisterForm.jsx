@@ -4,7 +4,7 @@ import { encryptPassword } from '../lib/crypto.js';
 import { v4 as uuidv4 } from 'uuid';
 import {useTranslation} from "react-i18next";
 
-const AddUser  = () => {
+const RegisterForm  = () => {
     const { t } = useTranslation();
     const [displayName, setDisplayName] = useState("");
     const [email, setEmail] = useState("");
@@ -73,13 +73,15 @@ const AddUser  = () => {
                 })
                 .catch((e) => {
                     console.log(e);
+                    setLoading(false);
                 });
 
         }
         } catch (error) {
             console.log(error);
-        } finally {
             setLoading(false);
+        } finally {
+           //
         }
 
     };
@@ -177,4 +179,4 @@ const AddUser  = () => {
     );
 };
 
-export default AddUser;
+export default RegisterForm;

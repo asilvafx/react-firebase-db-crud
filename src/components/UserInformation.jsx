@@ -1,7 +1,7 @@
 import React from 'react';
 
 const UserInformation = ({ userData }) => {
-    
+
     return (
         <div className="w-full px-4 mb-8">
             <div className="w-full border p-8">
