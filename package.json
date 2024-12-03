@@ -26,7 +26,7 @@
     "react-i18next": "^15.0.0",
     "react-icons": "^5.2.1",
     "react-lazy-load-image-component": "^1.6.2",
-    "react-router-dom": "^6.25.1",
+    "react-router-dom": "^7.0.2",
     "save-dev": "^0.0.1-security",
     "tailwind-merge": "^2.4.0",
     "tailwindcss-animate": "^1.0.7",

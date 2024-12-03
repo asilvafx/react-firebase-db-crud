@@ -1,6 +1,6 @@
 import React, { Suspense, lazy, useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { HelmetProvider } from 'react-helmet-async'; 
+import { HelmetProvider } from 'react-helmet-async';
 
 import Home from './pages/Home';
 const Add = lazy(() => import('./pages/Add'));
@@ -8,21 +8,26 @@ const Add = lazy(() => import('./pages/Add'));
 const Cookies = lazy(() => import('./components/Cookies'));
 
 
-const App = () => {    
- 
+const App = () => {
+
   return (
-    <HelmetProvider> 
-      <Suspense fallback={<div id="loading">Loading...</div>}> 
-            <Router>    
-              <Cookies /> 
+    <HelmetProvider>
+      <Suspense fallback={<div id="loading">Loading...</div>}>
+            <Router
+                future={{
+                v7_startTransition: true,
+                v7_relativeSplatPath: true,
+                }}
+            >
+              <Cookies />
                 <div className="page-view">
                   <Routes>
-                    <Route path="/" element={<Home />} /> 
+                    <Route path="/" element={<Home />} />
                     <Route path="/add" element={<Add />} />
                     <Route path="*" element={<Home />} />
-                  </Routes>  
-                </div> 
-            </Router>  
+                  </Routes>
+                </div>
+            </Router>
       </Suspense>
     </HelmetProvider>
   );
