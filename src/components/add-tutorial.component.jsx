@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import TutorialDataService from "../services/tutorial.service";
+import DBService from "../services/db.service.js";
 
 export default class AddTutorial extends Component {
     constructor(props) {
@@ -36,7 +36,7 @@ export default class AddTutorial extends Component {
             status: false
         };
 
-        TutorialDataService.create(data, 'users')
+        DBService.create(data, 'users')
             .then(() => {
                 console.log("New user created successfully!");
                 this.setState({

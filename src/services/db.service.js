@@ -14,15 +14,15 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
-class TutorialDataService {
+class DBService {
     getAll(table = 'tutorials') {
-        const tutorialsRef = ref(db, `/${table}`);
-        return tutorialsRef;
+        const requestRef = ref(db, `/${table}`);
+        return requestRef;
     }
 
     create(data, table = 'tutorials') {
-        const tutorialsRef = ref(db, `/${table}`);
-        return push(tutorialsRef, data);
+        const requestRef = ref(db, `/${table}`);
+        return push(requestRef, data);
     }
 
     update(key, value, table = 'tutorials') {
@@ -36,9 +36,9 @@ class TutorialDataService {
     }
 
     deleteAll(table = 'tutorials') {
-        const tutorialsRef = ref(db, `/${table}`);
-        return remove(tutorialsRef);
+        const requestRef = ref(db, `/${table}`);
+        return remove(requestRef);
     }
 }
 
-export default new TutorialDataService();
+export default new DBService();

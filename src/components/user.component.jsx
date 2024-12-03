@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import TutorialDataService from "../services/tutorial.service";
+import DBService from "../services/db.service.js";
 
-export default class Tutorial extends Component {
+export default class UserView extends Component {
     constructor(props) {
         super(props);
         this.onChangeEmail = this.onChangeEmail.bind(this);
@@ -64,7 +64,7 @@ export default class Tutorial extends Component {
     }
 
     updateStatus(status) {
-        TutorialDataService.update(this.state.currentUser.key, {
+        DBService.update(this.state.currentUser.key, {
             status: status,
         }, 'users')
             .then(() => {
@@ -87,7 +87,7 @@ export default class Tutorial extends Component {
             password: this.state.currentUser.password,
         };
 
-        TutorialDataService.update(this.state.currentUser.key, data, 'users')
+        DBService.update(this.state.currentUser.key, data, 'users')
             .then(() => {
                 this.setState({
                     message: "User profile was updated successfully!",
@@ -99,7 +99,7 @@ export default class Tutorial extends Component {
     }
 
     deleteUser() {
-        TutorialDataService.delete(this.state.currentUser.key, 'users')
+        DBService.delete(this.state.currentUser.key, 'users')
             .then(() => {
                 this.props.refreshList();
             })

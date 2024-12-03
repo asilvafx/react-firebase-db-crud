@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import TutorialDataService from "../services/tutorial.service";
-import Tutorial from "./tutorial.component";
+import DBService from "../services/db.service.js";
+import UserView from "./user.component";
 import { onValue } from "firebase/database";
 import { FaUser } from "react-icons/fa";
 
@@ -20,12 +20,12 @@ export default class TutorialsList extends Component {
     }
 
     componentDidMount() {
-        const usersRef = TutorialDataService.getAll('users');
+        const usersRef = DBService.getAll('users');
         onValue(usersRef, this.onDataChange);
     }
 
     componentWillUnmount() {
-        const usersRef = TutorialDataService.getAll('users');
+        const usersRef = DBService.getAll('users');
         // Note: Firebase v9+ does not have an off method for removing listeners
         // You can use a cleanup function if needed, but it's not required for onValue
     }
@@ -64,7 +64,7 @@ export default class TutorialsList extends Component {
     }
 
     removeAllUsers() {
-        TutorialDataService.deleteAll('users')
+        DBService.deleteAll('users')
             .then(() => {
                 this.refreshList();
             })
@@ -107,7 +107,7 @@ export default class TutorialsList extends Component {
                 </div>
                 <div className="w-full border p-8">
                     {currentUser ? (
-                        <Tutorial
+                        <UserView
                             user={currentUser}
                             refreshList={this.refreshList}
                         />
