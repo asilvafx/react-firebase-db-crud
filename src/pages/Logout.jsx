@@ -12,7 +12,9 @@ const Logout = () => {
     window.location.href = '/';
 
     return (
-        <div>Signing out.. </div>
+        <div className="w-full max-w-2xl min-h-screen flex flex-col justify-center items-center m-auto">
+            Signing out..
+        </div>
     );
 }
 

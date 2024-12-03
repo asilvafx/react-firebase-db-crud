@@ -2,7 +2,7 @@ import React from 'react';
 import { DarkThemeToggle } from "flowbite-react";
 import { IoMenu } from "react-icons/io5";
 import { Link } from "react-router-dom";
-import Cookies from "js-cookie"; 
+import Cookies from "js-cookie";
 const Header = () => {
 
     const isLoggedIn = Cookies.get('isLoggedIn');
@@ -15,7 +15,7 @@ const Header = () => {
                         <img src="https://flowbite.com/docs/images/logo.svg" className="mr-3 h-6 sm:h-9"
                              alt="App Logo"/>
                         <span
-                            className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">React App</span>
+                            className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Realtime Database + CRUD</span>
                     </Link>
                     <div className="flex items-center lg:order-2">
                         <DarkThemeToggle className="btn text-alt hover:bg-alt focus:ring-0"/>

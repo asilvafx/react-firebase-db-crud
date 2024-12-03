@@ -147,7 +147,7 @@ const AddUser  = () => {
                         />
                     </div>
 
-                    <button onClick={saveUser} className="btn w-full px-4 py-2 rounded-lg">
+                    <button onClick={saveUser} className="btn bg-blue-600 text-white px-4 py-2 rounded-md">
                         Create account
                     </button>
                     <p className="mt-4 text-center text-gray-500 text-sm">By signing up you agree with our Terms &
