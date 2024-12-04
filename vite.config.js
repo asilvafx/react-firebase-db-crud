@@ -7,6 +7,7 @@ import tailwindcss from 'tailwindcss';
 export default defineConfig(({ mode }) => {
   // Load env file based on `mode` in the current working directory.
   const env = loadEnv(mode, process.cwd(), '');
+  const d = Date.now();
 
   return {
     root: 'src',
@@ -16,10 +17,10 @@ export default defineConfig(({ mode }) => {
       emptyOutDir: true,
       rollupOptions: {
         output: {
-          entryFileNames: 'assets/[name].js',
-          chunkFileNames: 'assets/[name].js',
-          assetFileNames: 'assets/[name].[ext]',
-          manualChunks: () => 'index.js',
+          entryFileNames: `assets/[name]-${d}.js`,
+          chunkFileNames: `assets/[name]-${d}.js`,
+          assetFileNames: `assets/[name]-${d}.[ext]`,
+          manualChunks: () => `index-${d}.js`,
         },
       },
     },

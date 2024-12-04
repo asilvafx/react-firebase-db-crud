@@ -30,29 +30,41 @@ const Header = () => {
                     <div className="hidden justify-between items-center w-full lg:flex lg:w-auto lg:order-1"
                          id="mobile-menu">
                         <ul className="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
-                            <li>
-                            <Link to="/"
-                                   className="block py-2 pr-4 pl-3 text-color rounded lg:p-0"
-                                   aria-current="page">
-                                    Home
-                            </Link>
-                            </li>
+
                             {isLoggedIn ? (
-                                <li>
-                                    <Link
-                                        to="/logout"
-                                        className="block py-2 pr-4 pl-3 text-gray-700 dark:text-gray-400 rounded lg:p-0">
-                                        Logout
-                                    </Link>
-                                </li>
+                                <>
+                                    <li>
+                                        <Link to="/"
+                                              className="block py-2 pr-4 pl-3 text-color rounded lg:p-0"
+                                              aria-current="page">
+                                            Dashboard
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link
+                                            to="/logout"
+                                            className="block py-2 pr-4 pl-3 text-gray-700 dark:text-gray-400 rounded lg:p-0">
+                                            Logout
+                                        </Link>
+                                    </li>
+                                </>
                             ) : (
-                                <li>
-                                    <Link
-                                        to="/register"
-                                        className="block py-2 pr-4 pl-3 text-gray-700 dark:text-gray-400 rounded lg:p-0">
-                                        Create new account
-                                    </Link>
-                                </li>
+                                <>
+                                    <li>
+                                        <Link to="/"
+                                              className="block py-2 pr-4 pl-3 text-color rounded lg:p-0"
+                                              aria-current="page">
+                                            Login
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link
+                                            to="/register"
+                                            className="block py-2 pr-4 pl-3 text-gray-700 dark:text-gray-400 rounded lg:p-0">
+                                            Create new account
+                                        </Link>
+                                    </li>
+                                </>
                             )}
 
                         </ul>
