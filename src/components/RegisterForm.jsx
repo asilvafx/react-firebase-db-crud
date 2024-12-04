@@ -32,7 +32,8 @@ const RegisterForm  = () => {
         setConfirmPassword(e.target.value);
     };
 
-    const saveUser  = async () => {
+    const saveUser  = async (e) => {
+        e.preventDefault();
         setLoading(true);
 
         if( !displayName || !email || !password ) {
@@ -104,7 +105,7 @@ const RegisterForm  = () => {
                     </Link>
                 </div>
             ) : (
-                <div className="w-full max-w-2xl p-6 border flex flex-col m-auto">
+                <form className="w-full max-w-2xl p-6 border flex flex-col m-auto">
 
                     <div className="mb-8">
                         <h1 className="text-2xl mb-2">{t('register_title')}</h1>
@@ -166,6 +167,7 @@ const RegisterForm  = () => {
                     )}
 
                     <button
+                        type="submit"
                         onClick={saveUser}
                         disabled={loading}
                         className={`btn bg-blue-600 text-white px-4 py-2 rounded-md ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
@@ -176,7 +178,7 @@ const RegisterForm  = () => {
                     <p className="mt-4 text-center text-gray-500 text-sm">By signing up you agree with our Terms &
                         Conditions.</p>
 
-                </div>
+                </form>
             )}
         </div>
     );
