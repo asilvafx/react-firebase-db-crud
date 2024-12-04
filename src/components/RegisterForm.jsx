@@ -1,8 +1,9 @@
 import React, { useState } from "react";
+import {Link} from "react-router-dom";
+import {useTranslation} from "react-i18next";
+import { v4 as uuidv4 } from 'uuid';
 import DBService from "../data/db.service.js";
 import { encryptPassword } from '../lib/crypto.js';
-import { v4 as uuidv4 } from 'uuid';
-import {useTranslation} from "react-i18next";
 
 const RegisterForm  = () => {
     const { t } = useTranslation();
@@ -67,7 +68,7 @@ const RegisterForm  = () => {
 
             DBService.create(data, 'users')
                 .then(() => {
-                    console.log("New user created successfully!");
+                    console.log("Account created successfully!");
                     setSubmitted(true);
                     setErrorMessage("");
                 })
@@ -97,10 +98,10 @@ const RegisterForm  = () => {
         <div className="submit-form">
             {submitted ? (
                 <div className="w-full max-w-2xl flex flex-col items-center justify-center m-auto">
-                    <h4 className="mb-4">New user created successfully!</h4>
-                    <button className="btn px-4 py-2" onClick={newUser }>
-                        Add another
-                    </button>
+                    <h4 className="mb-4">Account created successfully!</h4>
+                    <Link to="/" className="btn px-4 py-2">
+                        Sign in
+                    </Link>
                 </div>
             ) : (
                 <div className="w-full max-w-2xl p-6 border flex flex-col m-auto">

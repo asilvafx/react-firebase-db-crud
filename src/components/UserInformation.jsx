@@ -9,9 +9,8 @@ const UserInformation = ({ userData }) => {
                 <p>UID: {userData.uid}</p>
                 <p>Account Name: {userData.displayName}</p>
                 <p>Email: {userData.email}</p>
-                <p>Role: {userData.isAdmin ? 'Admin' : 'User'}</p>
+                <p>Role: {userData?.isAdmin ? 'Admin' : 'User '}</p>
             </div>
-
         </div>
     );
 }

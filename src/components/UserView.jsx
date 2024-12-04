@@ -85,7 +85,7 @@ const UserView = ({ user, refreshList }) => {
 
         DBService.update(currentUser .key, data, 'users')
             .then(() => {
-                setMessage("User  profile was updated successfully!");
+                setMessage("User was updated successfully!");
             })
             .catch((e) => {
                 console.log(e);
