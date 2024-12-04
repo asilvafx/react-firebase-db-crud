@@ -14,11 +14,16 @@ const Home = ({ userData }) => { // Correctly destructure userData from props
     const isLoggedIn = Cookies.get('isLoggedIn');
 
     useEffect(() => {
-        // Check if userData is not empty
-        if (Object.keys(userData).length > 0) {
+        if(isLoggedIn){
+            // Check if userData is not empty
+            if (Object.keys(userData).length > 0) {
+                setLoading(false);
+            }
+        } else {
             setLoading(false);
         }
     }, [userData]); // Add userData to the dependency array
+
 
     if (loading) {
         return (
