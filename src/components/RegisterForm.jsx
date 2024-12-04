@@ -86,7 +86,7 @@ const RegisterForm  = () => {
            //
         }
 
-    }; 
+    };
 
     return (
         <div className="submit-form">
