@@ -62,7 +62,7 @@ const UserView = ({ user, refreshList }) => {
     };
 
     const updateStatus = (status) => {
-        DBService.update(currentUser .key, { status }, 'users')
+        DBService.update(currentUser.key, { status }, 'users')
             .then(() => {
                 setCurrentUser ((prev) => ({
                     ...prev,
@@ -77,13 +77,13 @@ const UserView = ({ user, refreshList }) => {
 
     const updateUser  = () => {
         const data = {
-            displayName: currentUser .displayName,
-            email: currentUser .email,
-            password: currentUser .password,
-            isAdmin: currentUser .isAdmin, // Include isAdmin in the update
+            displayName: currentUser.displayName,
+            email: currentUser.email,
+            password: currentUser.password,
+            isAdmin: currentUser.isAdmin, // Include isAdmin in the update
         };
 
-        DBService.update(currentUser .key, data, 'users')
+        DBService.update(currentUser.key, data, 'users')
             .then(() => {
                 setMessage("User was updated successfully!");
             })
@@ -93,7 +93,7 @@ const UserView = ({ user, refreshList }) => {
     };
 
     const deleteUser  = () => {
-        DBService.delete(currentUser .key, 'users')
+        DBService.delete(currentUser.key, 'users')
             .then(() => {
                 refreshList();
             })
