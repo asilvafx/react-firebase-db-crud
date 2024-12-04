@@ -32,7 +32,7 @@ const RegisterForm  = () => {
         setConfirmPassword(e.target.value);
     };
 
-    const saveUser  = async (e) => {
+    const handleSubmit  = async (e) => {
         e.preventDefault();
         setLoading(true);
 
@@ -86,14 +86,7 @@ const RegisterForm  = () => {
            //
         }
 
-    };
-
-    const newUser  = () => {
-        setEmail("");
-        setPassword("");
-        setSubmitted(false);
-        setErrorMessage(""); // Clear error message when starting over
-    };
+    }; 
 
     return (
         <div className="submit-form">
@@ -105,7 +98,7 @@ const RegisterForm  = () => {
                     </Link>
                 </div>
             ) : (
-                <form className="w-full max-w-2xl p-6 border flex flex-col m-auto">
+                <form onSubmit={handleSubmit} className="w-full max-w-2xl p-6 border flex flex-col m-auto">
 
                     <div className="mb-8">
                         <h1 className="text-2xl mb-2">{t('register_title')}</h1>
@@ -168,7 +161,6 @@ const RegisterForm  = () => {
 
                     <button
                         type="submit"
-                        onClick={saveUser}
                         disabled={loading}
                         className={`btn bg-blue-600 text-white px-4 py-2 rounded-md ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
                     >
