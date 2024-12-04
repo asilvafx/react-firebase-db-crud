@@ -1,4 +1,4 @@
-# Web App: Firebase Hosting & Realtime Database
+# React App: Firebase Hosting & Realtime Database
 
 A lightweight, production-ready boilerplate for React projects built on Vite. This setup includes essential dependencies for modern web development, such as Firebase services and tools, Axios for API requests, i18n for internationalization, and React Router for route management. Includes Tailwind CSS for styling, Flowbite for Better UI UX, ESLint for code quality, and support for environment variables.
 
