@@ -34,7 +34,7 @@ A lightweight, production-ready boilerplate for React projects built on Vite. Th
    Rename the .env-sample to .env
 
 
-3. **Edit Realtime Database "Rules" in your Firebase Console **
+3. **Edit Realtime Database "Rules" in your Firebase Console**
    ```bash 
    {  "rules": {
     ".read": "now < 1735772400000",  // 2025-1-2
