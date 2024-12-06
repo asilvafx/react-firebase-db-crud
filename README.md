@@ -31,7 +31,17 @@ A lightweight, production-ready boilerplate for React projects built on Vite. Th
    (Optional) Check the option "Also set up Firebase Hosting for this app", if you wish to setup a hosting for your web app.
    Copy your Firebase configuration
    Update the configuration in your .env-sample at your root directory
-   Rename the .env-sample to .env   
+   Rename the .env-sample to .env
+
+
+3. **Edit Realtime Database "Rules" in your Firebase Console **
+   ```bash 
+   {  "rules": {
+    ".read": "now < 1735772400000",  // 2025-1-2
+    ".write": "now < 1735772400000",  // 2025-1-2 
+	  "users": {
+      ".indexOn": ["uid", "email"]
+   } } }
 
 3. **Development**
    ```bash
