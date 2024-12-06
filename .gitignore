@@ -16,6 +16,7 @@ package-lock.json
 # Editor directories and files
 .firebaserc
 .firebase
+firebase.json
 .vscode/*
 !.vscode/extensions.json
 .idea
