@@ -10,16 +10,21 @@ import Loading from "../components/Loading";
 const Home = ({ userData }) => { // Correctly destructure userData from props
 
     const { t } = useTranslation();
+    const twilioConfig = {
+        id: process.env.TWILIO_ID,
+        auth_token: process.env.TWILIO_AUTH_TOKEN,
+        number: process.env.TWILIO_NUMBER
+    };
 
     useEffect(() => {
         const sendMessage = async () => {
-            const accountSid = 'ACf65d5037f835d7be0ba555e84e8382ac';
-            const authToken = '75b50ed34fa32fddb3413c7d0c6fe426';
+            const accountSid = twilioConfig.id;
+            const authToken = twilioConfig.auth_token;
             const url = `https://api.twilio.com/2010-04-01/Accounts/${accountSid}/Messages.json`;
 
             const data = new URLSearchParams({
                 Body: 'Hey this is just a test',
-                From: '+17856294635',
+                From: twilioConfig.number,
                 To: '+33610291986'
             });
 
