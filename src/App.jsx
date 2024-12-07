@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import Cookies from 'js-cookie';
 import DBService from './data/db.service';
-import bg_img from './assets/bg.jpg';
 
 
 import Home from './pages/Home';
@@ -42,20 +41,8 @@ const App = () => {
     return (
         <HelmetProvider>
             <Suspense fallback={<Loading />}>
-                <style>{` 
-                    body .bg-img {
-                        background: url(${bg_img}) no-repeat center center fixed;
-                            background-size: cover;
-                            opacity: 0.5;
-                            min-width: 100%;
-                            min-height: 100vh;
-                            position: fixed;
-                            z-index: -1;
-                    }
-                `}</style>
                 <Router>
-                    <CookiesWidget/>
-                    <div className="bg-img"></div>
+                    <CookiesWidget/> 
                     <div className="page-view">
                         <Routes>
                             <Route path="/" element={<Home userData={userData}/>}/>
