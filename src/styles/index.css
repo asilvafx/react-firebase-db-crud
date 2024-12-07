@@ -116,6 +116,10 @@
   #root {
     width: 100%;
     overscroll-behavior: none;
+    scroll-behavior: smooth;
+    max-width: 100%;
+    overflow-x: hidden;
+    position: relative;
   }
   *::selection {
     background: var(--background-color);
