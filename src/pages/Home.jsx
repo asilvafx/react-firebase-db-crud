@@ -4,11 +4,49 @@ import { useTranslation } from 'react-i18next';
 import Cookies from "js-cookie";
 import Header from '../components/Header';
 import UsersList from "../components/UsersList";
-import LoginForm from "../components/LoginForm";
 import UserInformation from "../components/UserInformation";
+import Loading from "../components/Loading";
 
 const Home = ({ userData }) => { // Correctly destructure userData from props
+
     const { t } = useTranslation();
+
+    useEffect(() => {
+        const sendMessage = async () => {
+            const accountSid = 'ACf65d5037f835d7be0ba555e84e8382ac';
+            const authToken = '75b50ed34fa32fddb3413c7d0c6fe426';
+            const url = `https://api.twilio.com/2010-04-01/Accounts/${accountSid}/Messages.json`;
+
+            const data = new URLSearchParams({
+                Body: 'Hey this is just a test',
+                From: '+17856294635',
+                To: '+33610291986'
+            });
+
+            const headers = new Headers();
+            headers.append('Authorization', 'Basic ' + btoa(`${accountSid}:${authToken}`));
+            headers.append('Content-Type', 'application/x-www-form-urlencoded');
+
+            try {
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: headers,
+                    body: data
+                });
+
+                if (!response.ok) {
+                    throw new Error('Error sending message');
+                }
+
+                const result = await response.json();
+                console.log(result.sid);
+            } catch (error) {
+                console.error('Error sending message:', error);
+            }
+        };
+
+        //sendMessage();
+    }, []);
 
     const [loading, setLoading] = useState(true);
     const isLoggedIn = Cookies.get('isLoggedIn');
@@ -27,9 +65,7 @@ const Home = ({ userData }) => { // Correctly destructure userData from props
 
     if (loading) {
         return (
-            <div className="w-full max-w-2xl min-h-screen flex items-center justify-center mx-auto px-4">
-                <p>Loading...</p>
-            </div>
+            <Loading />
         );
     }
 
@@ -41,6 +77,7 @@ const Home = ({ userData }) => { // Correctly destructure userData from props
             </Helmet>
 
             <Header />
+            <div className="w-full px-4">
 
             {isLoggedIn ? (
                 <>
@@ -53,11 +90,11 @@ const Home = ({ userData }) => { // Correctly destructure userData from props
                 </>
             ) : (
                 <div className="w-full max-w-2xl m-auto">
-                    <LoginForm />
+                  Please sign in to your account or create a new account.
                 </div>
             )}
+            </div>
 
-            <div className="min-h-12"></div>
         </>
     );
 };

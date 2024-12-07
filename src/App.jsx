@@ -3,12 +3,16 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import Cookies from 'js-cookie';
 import DBService from './data/db.service';
+import bg_img from './assets/bg.jpg';
+
 
 import Home from './pages/Home';
 const Register = lazy(() => import('./pages/Register'));
 const Logout = lazy(() => import('./pages/Logout'));
+const Login = lazy(() => import('./pages/Login'));
 
 const CookiesWidget = lazy(() => import('./components/CookiesWidget'));
+const Loading = lazy(() => import('./components/Loading'));
 
 const App = () => {
     const isLoggedIn = Cookies.get('isLoggedIn');
@@ -37,20 +41,28 @@ const App = () => {
 
     return (
         <HelmetProvider>
-            <Suspense fallback={<div id="loading">Loading...</div>}>
-                <Router
-                    future={{
-                        v7_startTransition: true,
-                        v7_relativeSplatPath: true,
-                    }}
-                >
-                    <CookiesWidget />
+            <Suspense fallback={<Loading />}>
+                <style>{` 
+                    body .bg-img {
+                        background: url(${bg_img}) no-repeat center center fixed;
+                            background-size: cover;
+                            opacity: 0.5;
+                            min-width: 100%;
+                            min-height: 100vh;
+                            position: fixed;
+                            z-index: -1;
+                    }
+                `}</style>
+                <Router>
+                    <CookiesWidget/>
+                    <div className="bg-img"></div>
                     <div className="page-view">
                         <Routes>
-                            <Route path="/" element={<Home userData={userData} />} />
-                            <Route path="/register" element={<Register />} />
-                            <Route path="/logout" element={<Logout />} />
-                            <Route path="*" element={<Home userData={userData} />} />
+                            <Route path="/" element={<Home userData={userData}/>}/>
+                            <Route path="/register" element={<Register/>}/>
+                            <Route path="/login" element={<Login/>}/>
+                            <Route path="/logout" element={<Logout/>}/>
+                            <Route path="*" element={<Home userData={userData}/>}/>
                         </Routes>
                     </div>
                 </Router>

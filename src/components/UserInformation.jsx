@@ -65,7 +65,7 @@ const UserInformation = ({ userData }) => {
                             className="w-20 h-20 rounded-full border"
                         />
                         {loading && (
-                            <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 rounded-full">
+                            <div className="absolute top-0 flex items-center justify-center bg-black bg-opacity-50 h-20 w-20 rounded-full">
                                 <div className="loader"></div> {/* Loader animation */}
                             </div>
                         )}

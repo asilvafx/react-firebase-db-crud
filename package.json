@@ -9,7 +9,9 @@
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
-  "dependencies": {
+  "dependencies": { 
+    "@radix-ui/react-label": "^2.1.0",
+    "@radix-ui/react-slot": "^1.1.0",
     "axios": "^1.7.2",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
@@ -31,11 +33,12 @@
     "save-dev": "^0.0.1-security",
     "tailwind-merge": "^2.5.5",
     "tailwindcss-animate": "^1.0.7",
+    "twilio": "^5.3.7",
     "uuid": "^11.0.3",
     "vanilla-cookieconsent": "^3.0.1"
   },
   "devDependencies": {
-    "@types/node": "^20.14.12",
+    "@types/node": "^20.17.9",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react-swc": "^3.5.0",

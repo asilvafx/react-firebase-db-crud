@@ -8,74 +8,40 @@ const Header = () => {
     const isLoggedIn = Cookies.get('isLoggedIn');
 
     return (
+        <>
         <header>
-            <nav className="fixed w-full top-0 bg-secondary border-gray-200 px-4 lg:px-6 py-2.5">
-                <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl h-10">
-                    <Link to="/" className="flex items-center">
-                        <img src="https://flowbite.com/docs/images/logo.svg" className="mr-3 h-6 sm:h-9"
-                             alt="App Logo"/>
+            <nav
+                className="bg-white dark:bg-gray-900 fixed w-full z-20 top-0 start-0 border-b border-gray-200 dark:border-gray-600">
+                <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+                    <Link to="/" className="flex items-center space-x-3 rtl:space-x-reverse">
+                        <img src="https://flowbite.com/docs/images/logo.svg" className="h-8" alt="Flowbite Logo"/>
                         <span
-                            className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Realtime Database + CRUD</span>
+                            className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">CryptoFX</span>
                     </Link>
-                    <div className="flex items-center lg:order-2">
+
+                    <div className="flex md:order-2 space-x-3 md:space-x-2 rtl:space-x-reverse h-[36px]">
                         <DarkThemeToggle className="btn text-alt hover:bg-alt focus:ring-0"/>
+                        {isLoggedIn ? (
+                            <Link to="/logout"
+                                  className="btn text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                Logout
+                            </Link>
+                        ) : (
+                            <Link to="/login"
+                                  className="btn text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                Sign in
+                            </Link>
+                        )}
 
-                        <button data-collapse-toggle="mobile-menu" type="button"
-                                className="inline-flex lg:hidden items-center p-2 ml-2 rounded-lg"
-                                aria-controls="mobile-menu" aria-expanded="false">
-                            <span className="sr-only">Open main menu</span>
-                            <IoMenu className="text-2xl"/>
-                        </button>
-                    </div>
-                    <div className="hidden justify-between items-center w-full lg:flex lg:w-auto lg:order-1"
-                         id="mobile-menu">
-                        <ul className="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
-
-                            {isLoggedIn ? (
-                                <>
-                                    <li>
-                                        <Link to="/"
-                                              className="block py-2 pr-4 pl-3 text-color rounded lg:p-0"
-                                              aria-current="page">
-                                            Dashboard
-                                        </Link>
-                                    </li>
-                                    <li>
-                                        <Link
-                                            to="/logout"
-                                            className="block py-2 pr-4 pl-3 text-gray-700 dark:text-gray-400 rounded lg:p-0">
-                                            Logout
-                                        </Link>
-                                    </li>
-                                </>
-                            ) : (
-                                <>
-                                    <li>
-                                        <Link to="/"
-                                              className="block py-2 pr-4 pl-3 text-color rounded lg:p-0"
-                                              aria-current="page">
-                                            Login
-                                        </Link>
-                                    </li>
-                                    <li>
-                                        <Link
-                                            to="/register"
-                                            className="block py-2 pr-4 pl-3 text-gray-700 dark:text-gray-400 rounded lg:p-0">
-                                            Create new account
-                                        </Link>
-                                    </li>
-                                </>
-                            )}
-
-                        </ul>
                     </div>
                 </div>
             </nav>
 
-            <div className="min-h-40 w-full"></div>
+            <div className="min-h-24 w-full"></div>
 
 
         </header>
+        </>
     );
 }
 
