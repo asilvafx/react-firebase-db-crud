@@ -42,7 +42,7 @@ const App = () => {
         <HelmetProvider>
             <Suspense fallback={<Loading />}>
                 <Router>
-                    <CookiesWidget/> 
+                    <CookiesWidget/>
                     <div className="page-view">
                         <Routes>
                             <Route path="/" element={<Home userData={userData}/>}/>
