@@ -1,0 +1,15 @@
+{
+  "hosting": {
+    "public": "dist",
+    "ignore": [
+      "**/.*",
+      "**/node_modules/**"
+    ],
+      "rewrites": [
+        {
+        "source": "**/!(*.css|*.js|*.map|*.jpg|*.gif|*.png|*.php)",
+        "destination": "/index.html"
+        }
+      ]
+  }
+}

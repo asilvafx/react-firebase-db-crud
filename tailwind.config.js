@@ -17,14 +17,13 @@ const config = {
   			'2xl': '1400px'
   		}
   	},
-  	fontFamily: {
-  		sans: ['Roboto', 'sans-serif']
-  	},
   	extend: {
   		colors: {
   			border: 'hsl(var(--border))',
   			input: 'hsl(var(--input))',
   			ring: 'hsl(var(--ring))',
+			'neon-primary': 'var(--neon-primary)',
+			'neon-secondary': 'var(--neon-secondary)',
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
   			primary: {
@@ -79,11 +78,20 @@ const config = {
   				to: {
   					height: '0'
   				}
-  			}
+  			},
+			glow: {
+				'from': {
+					'text-shadow': '0 0 10px #fff, 0 0 20px #fff, 0 0 30px #0ff, 0 0 40px #0ff',
+				},
+				'to': {
+					'text-shadow': '0 0 5px #fff, 0 0 10px #fff, 0 0 15px #0ff, 0 0 20px #0ff',
+				},
+			}
   		},
   		animation: {
   			'accordion-down': 'accordion-down 0.2s ease-out',
-  			'accordion-up': 'accordion-up 0.2s ease-out'
+  			'accordion-up': 'accordion-up 0.2s ease-out',
+			'glow': 'glow 1.5s ease-in-out infinite alternate',
   		},
   		borderRadius: {
   			lg: 'var(--radius)',

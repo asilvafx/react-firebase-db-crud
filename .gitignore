@@ -14,12 +14,8 @@ package-lock.json
 *.local
 
 # Editor directories and files
-dist
-.zencoder
-.github
-.firebaserc
-.firebase
-firebase.json
+.firebase/*
+dist/
 .vscode/*
 !.vscode/extensions.json
 .idea
@@ -29,3 +25,5 @@ firebase.json
 *.njsproj
 *.sln
 *.sw?
+.firebase/hosting.ZGlzdA.cache
+*.cache

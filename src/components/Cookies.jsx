@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import "vanilla-cookieconsent/dist/cookieconsent.css";
 import * as CookieConsent from "vanilla-cookieconsent";  
 
-const CookiesWidget = () => {
+const Cookies = () => {
     useEffect(() => {
         CookieConsent.run({
           guiOptions: {
@@ -73,4 +73,4 @@ const CookiesWidget = () => {
       });
     }, []);
 }
-export default CookiesWidget;
+export default Cookies;

@@ -12,14 +12,21 @@ export default defineConfig(({ mode }) => {
   return {
     root: 'src',
     build: {
-      chunkSizeWarningLimit: 1600,
+      chunkSizeWarningLimit: 5000,
       outDir: '../dist',
       emptyOutDir: true,
       rollupOptions: {
         output: {
           entryFileNames: `assets/[name]-${d}.js`,
           chunkFileNames: `assets/[name]-${d}.js`,
-          assetFileNames: `assets/[name]-${d}.[ext]`,
+          assetFileNames: (assetInfo) => {
+            // Check if the asset is a CSS file
+            if (assetInfo.name && assetInfo.name.endsWith('.css')) {
+              return `assets/[name]-${d}.css`;
+            }
+            // Default behavior for other assets
+            return `assets/[name].[ext]`;
+          },
           manualChunks: () => `index-${d}.js`,
         },
       },
@@ -32,7 +39,7 @@ export default defineConfig(({ mode }) => {
     },
     resolve: {
       alias: {
-        "@": path.resolve(__dirname, "./src"),
+        "@": path.resolve("./src"),
       },
     },
     define: {
